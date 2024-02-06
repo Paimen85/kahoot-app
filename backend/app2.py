@@ -1,13 +1,22 @@
 from flask import Flask, jsonify, request
 from flask_cors import CORS
+from flask_jwt_extended import (
+    create_access_token,
+    get_jwt_identity,
+    jwt_required,
+    JWTManager,
+)
 import sqlite3
 import os.path
 import json
+import os
 
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 app = Flask(__name__)
+app.config["JWT_SECRET_KEY"] = os.environ.get('JWT_SECRET')
+jwt = JWTManager(app)
 CORS(app)
 
 
@@ -36,6 +45,18 @@ def get_question_by_id(question_id):
     if question is None:
         return "There is no question with id" + question_id
     return question
+
+
+@app.route('/login', methods=['POST'])
+def login():
+    email = request.json["email"]
+    password = request.json["password"]
+
+    if email != "test" or password != "test":
+        return jsonify({"msg": "Bad username or password"}), 401
+
+    access_token = create_access_token(identity=email)
+    return jsonify(access_token=access_token)
 
 
 @app.route("/start", methods=["GET"])
@@ -96,13 +117,15 @@ def update_question(id):
     correct_answer = request.json["correct_answer"]
 
     conn = get_db_connection()
-    conn.execute(
+    cursor = conn.cursor()
+    cursor.execute(
         "UPDATE question SET question = ?, answer_1 = ?, answer_2 = ?, answer_3 = ?, answer_4 = ?, correct_answer = ? WHERE  id = ?",
         (question, answer_1, answer_2, answer_3, answer_4, correct_answer, id),
     )
     conn.commit()
     conn.close()
-    return 'question updated'
+    return "question updated"
+
 
 
 if __name__ == "__main__":
