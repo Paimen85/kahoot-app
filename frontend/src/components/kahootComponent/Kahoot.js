@@ -1,15 +1,13 @@
 import React from "react";
 import QuestionComponent from "../questionComponent/QuestionComponent";
-import {
-  getQuestions,
-} from "../../features/questions/questionsSlice";
+import { getQuestions } from "../../features/questions/questionsSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { Button } from "react-bootstrap";
 import Answer from "../answerComponent/Answer";
 import CorrectCounter from "../answersCounter/CorrectCounter";
-import './kahoot.css'
+import "./kahoot.css";
 import WrongCounter from "../answersCounter/WrongCounter";
-
+import { setToken } from "../../features/login/loginSlice";
 
 const Kahoot = () => {
   const [hide, setHide] = React.useState(false);
@@ -19,6 +17,7 @@ const Kahoot = () => {
 
   React.useEffect(() => {
     dispatch(getQuestions());
+    
   }, [dispatch]);
 
   const startKahoot = () => {
@@ -26,7 +25,9 @@ const Kahoot = () => {
   };
   return (
     <>
-      {hide && <QuestionComponent question={questions[questionNumber].question} />}
+      {hide && (
+        <QuestionComponent question={questions[questionNumber].question} />
+      )}
       <Button className={hide ? "hide" : ""} onClick={() => startKahoot()}>
         Begin Kahoot
       </Button>
