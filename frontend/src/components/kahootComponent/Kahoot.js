@@ -16,7 +16,6 @@ const Kahoot = () => {
 
   React.useEffect(() => {
     dispatch(getQuestions());
-    
   }, [dispatch]);
 
   const startKahoot = () => {
@@ -27,9 +26,12 @@ const Kahoot = () => {
       {hide && (
         <QuestionComponent question={questions[questionNumber].question} />
       )}
-      <Button className={hide ? "hide" : ""} onClick={() => startKahoot()}>
-        Begin Kahoot
-      </Button>
+      <div className="btn-div">
+        <Button className={hide ? "hide" : ""} onClick={() => startKahoot()}>
+          Begin Kahoot
+        </Button>
+      </div>
+
       {hide && (
         <>
           <CorrectCounter />

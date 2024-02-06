@@ -16,10 +16,19 @@ const CreateKahoot = () => {
   const { question, answer_1, answer_2, answer_3, answer_4, correct_answer } =
     useSelector((state) => state.createKahoot);
 
+  let createdQuestion = JSON.stringify({
+    question,
+    answer_1,
+    answer_2,
+    answer_3,
+    answer_4,
+    correct_answer,
+  });
+
   const addQuestion = async (e) => {
     e.preventDefault();
-    await QuestionService.addQuestion()
-      .then()
+    await QuestionService.addQuestion(createdQuestion)
+      .then(res => console.log(res))
       .catch(function (error) {
         console.log(error);
       });
@@ -113,7 +122,9 @@ const CreateKahoot = () => {
                       className="form-control"
                       placeholder="Correct Answer"
                       value={correct_answer}
-                      onChange={(e) => dispatch(setCorrectAnswer(e.target.value))}
+                      onChange={(e) =>
+                        dispatch(setCorrectAnswer(e.target.value))
+                      }
                       required
                     />
                   </div>

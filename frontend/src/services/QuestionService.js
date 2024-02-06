@@ -7,7 +7,11 @@ class QuestionService {
       return axios.get(API_BASE_URL + "/start");
     }
     addQuestion(question) {
-      return axios.post(API_BASE_URL + "/add-question", question);
+      return axios.post(API_BASE_URL + "/add-question", question, {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
     }
   
     // getEventByID(id) {
