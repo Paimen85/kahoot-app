@@ -6,9 +6,9 @@ class QuestionService {
     getQuestions() {
       return axios.get(API_BASE_URL + "/start");
     }
-    // addEvent(event) {
-    //   return axios.post(EVENT_API_BASE_URL, event);
-    // }
+    addQuestion(question) {
+      return axios.post(API_BASE_URL + "/add-question", question);
+    }
   
     // getEventByID(id) {
     //   return axios.get(EVENT_API_BASE_URL + "/" + id);

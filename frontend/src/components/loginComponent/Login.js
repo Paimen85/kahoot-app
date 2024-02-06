@@ -22,7 +22,7 @@ const Login = () => {
   }, []);
 
   // by click login button getting token from server and saving it into sessionStorage
-  const handleClick = async (e) => {
+  const handleLoginClick = async (e) => {
     e.preventDefault();
     await AuthService.loginPageCall(email, password)
       .then((res) => {
@@ -30,8 +30,13 @@ const Login = () => {
         return res.data.access_token;
       })
       .then((token) => dispatch(setToken(token)))
-      .then(() => navigate("/start"))
+      .then(() => navigate("/createKahoot"))
       .catch((e) => console.error(e));
+  };
+
+  const handleLogoutClick = () => {
+    sessionStorage.removeItem("token");
+    dispatch(setToken(null));
   };
 
   return (
@@ -44,14 +49,14 @@ const Login = () => {
               <div>
                 <button
                   className="btn btn-primary mt-3 "
-                  onClick={() => navigate("/start")}
+                  onClick={() => navigate("/createKahoot")}
                 >
                   Create Kahoot
                 </button>
 
                 <button
                   className="btn btn-danger mt-3 ms-3 "
-                  onClick={() => navigate("/start")}
+                  onClick={() => handleLogoutClick()}
                 >
                   Log out
                 </button>
@@ -106,7 +111,7 @@ const Login = () => {
                   <div className="form-group mb-3">
                     <button
                       className="btn btn-success login-btn"
-                      onClick={(e) => handleClick(e)}
+                      onClick={(e) => handleLoginClick(e)}
                     >
                       Login
                     </button>

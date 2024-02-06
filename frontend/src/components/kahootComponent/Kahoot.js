@@ -7,7 +7,6 @@ import Answer from "../answerComponent/Answer";
 import CorrectCounter from "../answersCounter/CorrectCounter";
 import "./kahoot.css";
 import WrongCounter from "../answersCounter/WrongCounter";
-import { setToken } from "../../features/login/loginSlice";
 
 const Kahoot = () => {
   const [hide, setHide] = React.useState(false);
