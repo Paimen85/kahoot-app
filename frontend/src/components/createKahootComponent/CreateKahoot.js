@@ -8,13 +8,22 @@ import {
   setAnswer3,
   setAnswer4,
   setCorrectAnswer,
+  increment,
 } from "../../features/createKahoot/createKahootSlice";
 import { Link } from "react-router-dom";
+import "./createKahoot.css";
 
 const CreateKahoot = () => {
   const dispatch = useDispatch();
-  const { question, answer_1, answer_2, answer_3, answer_4, correct_answer } =
-    useSelector((state) => state.createKahoot);
+  const {
+    question,
+    answer_1,
+    answer_2,
+    answer_3,
+    answer_4,
+    correct_answer,
+    counter,
+  } = useSelector((state) => state.createKahoot);
 
   let createdQuestion = JSON.stringify({
     question,
@@ -28,16 +37,25 @@ const CreateKahoot = () => {
   const addQuestion = async (e) => {
     e.preventDefault();
     await QuestionService.addQuestion(createdQuestion)
-      .then(res => console.log(res))
+      .then((res) => console.log(res))
       .catch(function (error) {
         console.log(error);
       });
+
+    dispatch(setQuestion(""));
+    dispatch(setAnswer1(""));
+    dispatch(setAnswer2(""));
+    dispatch(setAnswer3(""));
+    dispatch(setAnswer4(""));
+    dispatch(setCorrectAnswer(""));
+    dispatch(increment());
   };
   return (
     <div>
       <div className="container">
+        <h1 className="text-center createKahoot">Create Kahoot</h1>
         <div className="row">
-          <div className="col-sm-6 mt-5 offset-md-3">
+          <div className="col-sm-6 offset-md-3">
             <div className="card">
               <h2 className="text-center">Add Question</h2>
               <div className="card-body">
@@ -144,6 +162,24 @@ const CreateKahoot = () => {
                         Cancel
                       </Link>
                     </div>
+                    {counter !== 0 ? (
+                      <>
+                        <div className="col-sm-4">
+                          You have added {counter} questions
+                        </div>
+                        <div className="col-sm-4">
+                          <Link
+                            type="submit"
+                            className="btn btn-primary"
+                            to={"/start"}
+                          >
+                            Start Kahoot
+                          </Link>
+                        </div>
+                      </>
+                    ) : (
+                      ""
+                    )}
                   </div>
                 </form>
               </div>

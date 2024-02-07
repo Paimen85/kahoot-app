@@ -7,6 +7,7 @@ const initialState = {
   answer_3: "",
   answer_4: "",
   correct_answer: "",
+  counter: 0
 };
 
 export const createKahootSlice = createSlice({
@@ -30,9 +31,12 @@ export const createKahootSlice = createSlice({
     },
     setCorrectAnswer: (state, action) => {
         state.correct_answer = action.payload;
+    },
+    increment: (state) => {
+        state.counter += 1
     }
   },
 });
 
-export const { setAnswer1, setQuestion, setAnswer2, setAnswer3, setAnswer4, setCorrectAnswer } = createKahootSlice.actions;
+export const { setAnswer1, setQuestion, setAnswer2, setAnswer3, setAnswer4, setCorrectAnswer, increment } = createKahootSlice.actions;
 export default createKahootSlice.reducer;
