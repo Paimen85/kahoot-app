@@ -60,6 +60,7 @@ def login():
 
 
 @app.route("/start", methods=["GET"])
+@jwt_required()
 def get_questions():
 
     # Convert tuple with product details to dict

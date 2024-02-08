@@ -7,9 +7,11 @@ import Answer from "../answerComponent/Answer";
 import CorrectCounter from "../answersCounter/CorrectCounter";
 import "./kahoot.css";
 import WrongCounter from "../answersCounter/WrongCounter";
+import { useNavigate } from "react-router-dom";
 
 const Kahoot = () => {
   const [hide, setHide] = React.useState(false);
+  const navigate = useNavigate()
 
   const { questions, questionNumber } = useSelector((state) => state.question);
   const dispatch = useDispatch();
@@ -18,8 +20,15 @@ const Kahoot = () => {
     dispatch(getQuestions());
   }, [dispatch]);
 
+  const token = sessionStorage.getItem('token')
+
   const startKahoot = () => {
-    setHide(true);
+    if (token && token !== "" && token !== undefined) {
+      setHide(true);
+    }
+    else {
+      navigate('/login')
+    }
   };
   return (
     <>

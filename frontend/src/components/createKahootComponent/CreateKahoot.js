@@ -66,6 +66,7 @@ const CreateKahoot = () => {
                     </label>
                     <input
                       type="text"
+                      id="question"
                       name="question"
                       className="form-control"
                       placeholder="Add Question"
@@ -81,6 +82,7 @@ const CreateKahoot = () => {
                     <input
                       type="text"
                       name="answer_1"
+                      id="answer_1"
                       className="form-control"
                       placeholder="Answer 1"
                       value={answer_1}
@@ -95,6 +97,7 @@ const CreateKahoot = () => {
                     <input
                       type="text"
                       name="answer_2"
+                      id="answer_2"
                       className="form-control"
                       placeholder="Answer 2"
                       value={answer_2}
@@ -109,6 +112,7 @@ const CreateKahoot = () => {
                     <input
                       type="text"
                       name="answer_3"
+                      id="answer_3"
                       className="form-control"
                       placeholder="Answer 3"
                       value={answer_3}
@@ -123,6 +127,7 @@ const CreateKahoot = () => {
                     <input
                       type="text"
                       name="answer_4"
+                      id="answer_4"
                       className="form-control"
                       placeholder="Answer 4"
                       value={answer_4}
@@ -137,6 +142,7 @@ const CreateKahoot = () => {
                     <input
                       type="text"
                       name="correct_answer"
+                      id="correct_answer"
                       className="form-control"
                       placeholder="Correct Answer"
                       value={correct_answer}

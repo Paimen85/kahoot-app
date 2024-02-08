@@ -4,7 +4,11 @@ const API_BASE_URL = "http://localhost:5000";
 
 class QuestionService {
     getQuestions() {
-      return axios.get(API_BASE_URL + "/start");
+      return axios.get(API_BASE_URL + "/start", {
+        headers: {
+          'Authorization': 'Bearer ' + sessionStorage.getItem('token')
+        }
+      });
     }
     addQuestion(question) {
       return axios.post(API_BASE_URL + "/add-question", question, {
