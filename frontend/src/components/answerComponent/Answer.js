@@ -32,11 +32,16 @@ const Answer = () => {
     }
 
     if (correctAnswer + wrongAnswer <= questions.length - 1) {
-      if (e.target.innerText === questions[questionNumber].correct_answer) {
+      
+      if ((e.target.innerText.trim()) === questions[questionNumber].correct_answer) {
+        console.log((e.target.innerText).trim())
+        console.log(questions[questionNumber].correct_answer)
         dispatch(incrementCorrect());
       }
 
-      if (e.target.innerText !== questions[questionNumber].correct_answer) {
+      if ((e.target.innerText.trim()) !== questions[questionNumber].correct_answer) {
+        console.log(e.target.innerText)
+        console.log(questions[questionNumber].correct_answer)
         dispatch(incrementWrong());
       }
     }
